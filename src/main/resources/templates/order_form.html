@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header"/>
+<body>
+
+<nav th:insert="fragments :: navbar"/>
+
+<div class="container mt-3 d-flex" style="width:100%">
+
+    <div class="row me-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${'Tiket Kereta Api ' + tiket.namaKereta}"></h5>
+                <p class="card-text" th:text="${tiket.kelas}"></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-primary" th:text="${'Waktu Berangkat : ' + tiket.waktuBerangkat}"></li>
+                <li class="list-group-item text-primary" th:text="${'Waktu Tiba : ' + tiket.waktuTiba}"></li>
+                <li class="list-group-item" th:text="${'Stasiun Asal : ' + tiket.stasiunAsal}"></li>
+                <li class="list-group-item" th:text="${'Stasiun Tujuan : ' + tiket.stasiunTujuan}"></li>
+            </ul>
+            <div class="card-body">
+                <h6 class="card-text" th:text="${'Harga : ' + tiket.harga}"></h6>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="d-inline">
+       <form th:action=@{/order_form} th:object="${pemesan}" method="post">
+           <input type="hidden" th:field="*{idTiket}" th:value="${idTiket}">
+           <div class="row">
+               <div class="form-group mb-3">
+                   <label for="nama_pemesan" class="col-form-label col-form-label-sm">Nama Pemesan</label>
+                   <div class="col-12" style="width: 400px">
+                       <input type="text" th:field="*{namaPemesan}" class="form-control form-control-sm" id="nama_pemesan" required/>
+                   </div>
+               </div>
+           </div>
+
+           <div class="row">
+               <div class="form-group mb-3">
+                   <label class="col-form-label col-form-label-sm">Jenis Kelamin</label>
+                   <div class="col-12" style="width: 400px">
+                       <div class="form-check">
+                           <input class="form-check-input" value="Laki-Laki" type="radio" th:field="*{jenisKelamin}" id="laki_laki">
+                           <label class="form-check-label" for="laki_laki" style="font-size:14px">Laki-Laki</label>
+                       </div>
+                       <div class="form-check">
+                           <input class="form-check-input" value="Perempuan" type="radio" th:field="*{jenisKelamin}"  id="perempuan">
+                           <label class="form-check-label" for="perempuan" style="font-size:14px">Perempuan</label>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <div class="row">
+               <div class="form-group mb-3">
+                   <label for="email" class="col-form-label col-form-label-sm">Email</label>
+                   <div class="col-12" style="width: 400px">
+                       <input type="email" th:field="*{email}" class="form-control form-control-sm" id="email"
+                              required/>
+                   </div>
+               </div>
+           </div>
+
+           <div class="row">
+               <div class="form-group mb-3">
+                   <label for="jumlah_beli" class="col-form-label col-form-label-sm">Jumlah Beli</label>
+                   <div class="col-12" style="width: 150px">
+                       <input type="number" th:field="*{jumlahBeli}" class="form-control form-control-sm" id="jumlah_beli"
+                              required/>
+                   </div>
+               </div>
+           </div>
+
+           <div class="row" style="padding:13px">
+               <button style="width:100px" type="submit" class="btn btn-primary btn-sm">Pesan</button>
+           </div>
+       </form>
+    </div>
+</div>
+
+<footer th:replace="fragments :: footer"/>
+
+</body>
+</html>

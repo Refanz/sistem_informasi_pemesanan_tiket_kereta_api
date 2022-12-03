@@ -15,11 +15,13 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Nama Kereta</th>
                     <th scope="col">Staisun Asal</th>
                     <th scope="col">Stasiun Tujuan</th>
                     <th scope="col">Waktu Berangkat</th>
                     <th scope="col">Waktu Tiba</th>
                     <th scope="col">Stok</th>
+                    <th scope="col">Kelas</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Aksi</th>
                 </tr>
@@ -27,13 +29,18 @@
                 <tbody>
                 <tr th:each="tiket, count : ${tiket}">
                     <th scope="row" th:text="${count.index + 1}"></th>
+                    <td th:text="${tiket.namaKereta}"></td>
                     <td th:text="${tiket.stasiunAsal}"></td>
                     <td th:text="${tiket.stasiunTujuan}"></td>
                     <td th:text="${tiket.waktuBerangkat}"></td>
                     <td th:text="${tiket.waktuTiba}"></td>
                     <td th:text="${tiket.stok}"></td>
+                    <td th:text="${tiket.kelas}"></td>
                     <td th:text="${tiket.harga}"></td>
-                    <td><a class="btn btn-primary" href="#">Pesan</a></td>
+                    <td>
+                        <a class="btn btn-primary" th:classappend="${tiket.stok == 0 ? 'disabled' : ''}"
+                           th:href="@{/order_form/{id_tiket}(id_tiket=${tiket.idTiket})}">Pesan</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -47,6 +54,7 @@
     $(document).ready(function () {
        $('#table1').DataTable();
     });
+
 
 </script>
 </body>
