@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header"/>
+<body>
+
+<nav th:insert="fragments :: navbar"/>
+
+<div class="container text-center mt-3">
+    <div class="row justify-content-center mb-4">
+        <div class="col-10">
+            <div class="card" style="width: 100%;">
+                <img width="150px" height="350px" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Kereta_api_penumpang_kelas_eksekutif..jpg" class="card-img-top" alt="Kereta Api">
+                <div class="card-body">
+                    <h5 class="card-title">Welcome</h5>
+                    <p class="card-text">Silahkan tekan tombol di bawah ini untuk melakukan pemesanan tiket kereta api.</p>
+                    <a href="/pesan_tiket" class="btn btn-primary">Pesan Tiket</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="fragments :: footer"/>
+</body>
+</html>

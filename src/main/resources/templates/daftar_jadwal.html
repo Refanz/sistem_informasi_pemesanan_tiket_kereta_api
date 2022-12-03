@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header"/>
+<body>
+
+<nav th:insert="fragments :: navbar"/>
+
+<div class="container mt-3">
+
+    <h3 class="text-center mb-5">Daftar Jadwal Keberangkatan Kereta Api</h3>
+
+    <div class="row justify-content-center">
+        <div class="table-responsive col-10 mb-3">
+            <table id="table1" class="table table-sm" style="width:100%">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Staisun Asal</th>
+                    <th scope="col">Stasiun Tujuan</th>
+                    <th scope="col">Waktu Berangkat</th>
+                    <th scope="col">Waktu Tiba</th>
+                    <th scope="col">Stok</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="tiket, count : ${tiket}">
+                    <th scope="row" th:text="${count.index + 1}"></th>
+                    <td th:text="${tiket.stasiunAsal}"></td>
+                    <td th:text="${tiket.stasiunTujuan}"></td>
+                    <td th:text="${tiket.waktuBerangkat}"></td>
+                    <td th:text="${tiket.waktuTiba}"></td>
+                    <td th:text="${tiket.stok}"></td>
+                    <td th:text="${tiket.harga}"></td>
+                    <td><a class="btn btn-primary" href="#">Pesan</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="fragments :: footer"/>
+<script>
+    $(document).ready(function () {
+       $('#table1').DataTable();
+    });
+
+</script>
+</body>
+</html>
