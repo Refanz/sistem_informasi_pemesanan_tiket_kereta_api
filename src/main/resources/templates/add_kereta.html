@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header"/>
+<body>
+
+<nav th:insert="fragments :: navbar"/>
+
+<div class="container mt-3">
+
+    <form th:action=@{/proses_tambah_kereta} th:object="${kereta}" method="post">
+        <h4>Input Kereta</h4>
+        <div class="row">
+            <div class="form-group mb-3">
+                <label for="nama_kereta" class="col-form-label col-form-label-sm">Nama Kereta</label>
+                <div class="col-12" style="width: 400px">
+                    <input type="text" th:field="*{namaKereta}" class="form-control form-control-sm"
+                           id="nama_kereta" required/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mb-3">
+                <label for="kelas" class="col-form-label col-form-label-sm">Kelas</label>
+                <div class="col-12" style="width: 400px">
+                    <select th:field="${kereta.kelas}" class="form-control form-control-sm"
+                            id="kelas">
+                        <option th:value="Bisnis">Bisnis</option>
+                        <option th:value="Ekonomi">Ekonomi</option>
+                        <option th:value="Eksekutif">Eksekutif</option>
+                        <option th:value="Luxury">Luxury</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mb-3">
+                <label for="jumlah_gerbong" class="col-form-label col-form-label-sm">Jumlah Gerbong</label>
+                <div class="col-12" style="width: 100px">
+                    <input type="number" th:field="*{jumlahGerbong}" class="form-control form-control-sm"
+                           id="jumlah_gerbong" required/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding:13px">
+            <button style="width:150px" type="submit" class="btn btn-primary btn-sm">Tambah Kereta</button>
+        </div>
+    </form>
+
+</div>
+
+<footer th:replace="fragments :: footer"/>
+
+</body>
+</html>

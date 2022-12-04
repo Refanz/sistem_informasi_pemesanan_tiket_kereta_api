@@ -49,7 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/pesan_tiket", "/about", "/order_form/{id_tiket}", "/payment_form",
 					"/payment_success", "/daftar_jadwal", "/tambah_jadwal",
 					"/proses_tambah_jadwal", "/edit_jadwal/{id_jadwal}",
-					"/proses_edit_jadwal", "/proses_hapus_jadwal/{id_jadwal}", "/pulihkan_jadwal").authenticated()
+					"/proses_edit_jadwal", "/proses_hapus_jadwal/{id_jadwal}", "/pulihkan_jadwal",
+					"/daftar_kereta", "/tambah_kereta", "/proses_tambah_kereta",
+					"/edit_kereta/{id_kereta}", "/proses_edit_kereta", "/proses_hapus_kereta/{id_kereta}",
+					"/pulihkan_kereta", "/pulihkan_kereta/recover/{id_kereta}",
+					"/pulihkan_kereta/delete/{id_kereta}").authenticated()
 			.anyRequest().permitAll()
 			.and()
 			.formLogin()

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header"/>
+
+<body>
+
+<nav th:insert="fragments :: navbar"/>
+
+<div class="container mt-3">
+
+    <h3 class="text-center mb-3">Daftar Kereta</h3>
+    <div class="row text-center justify-content-center">
+        <div class="col-5 mb-2">
+            <a th:href="@{/tambah_kereta}" class="btn btn-primary">Tambah</a>
+            <a th:href="@{/pulihkan_kereta}" class="btn btn-success">Pulihkan</a>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="table-responsive col-10 mb-3">
+            <table id="table1" class="table table-sm" style="width:100%">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nama Kereta</th>
+                    <th scope="col">Kelas</th>
+                    <th scope="col">Jumlah Gerbong</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="kereta, count : ${kereta}">
+                    <th scope="row" th:text="${count.index + 1}"></th>
+                    <td th:text="${kereta.namaKereta}"></td>
+                    <td th:text="${kereta.kelas}"></td>
+                    <td th:text="${kereta.jumlahGerbong}"></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{/edit_kereta/{id_kereta}(id_kereta = ${kereta.idKereta})}">Edit</a>
+                        <a class="btn btn-danger" th:href="@{/proses_hapus_kereta/{id_kereta}(id_kereta = ${kereta.idKereta})}">Hapus</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="fragments :: footer"/>
+<script>
+    $(document).ready(function () {
+       $('#table1').DataTable();
+    });
+</script>
+
+</body>
+</html>

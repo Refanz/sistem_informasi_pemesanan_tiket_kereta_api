@@ -6,11 +6,11 @@ public class Kereta {
     private String namaKereta;
     private String kelas;
     private int jumlahGerbong;
+    private String deleted;
 
     public int getIdKereta() {
         return idKereta;
     }
-
     public void setIdKereta(int idKereta) {
         this.idKereta = idKereta;
     }
@@ -31,6 +31,14 @@ public class Kereta {
         this.kelas = kelas;
     }
 
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
+    }
+
     public int getJumlahGerbong() {
         return jumlahGerbong;
     }
@@ -46,6 +54,7 @@ public class Kereta {
                 ", namaKereta='" + namaKereta + '\'' +
                 ", kelas='" + kelas + '\'' +
                 ", jumlahGerbong=" + jumlahGerbong +
+                ", deleted='" + deleted + '\'' +
                 '}';
     }
 }
