@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class AppController { //implements ErrorController
-
+public class AppController {
+//implements ErrorController
     private static final String PATH = "/error";
 
     @GetMapping("/")
@@ -28,7 +28,7 @@ public class AppController { //implements ErrorController
 //        model.addAttribute("homeActive", "true");
 //        return "index";
 //    }
-//
+
 //    @Override
 //    public String getErrorPath() {
 //        return PATH;

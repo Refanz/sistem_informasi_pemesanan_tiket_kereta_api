@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header"/>
+<body>
+
+<nav th:insert="fragments :: navbar"/>
+
+<div class="container mt-3">
+
+    <form th:action=@{/proses_edit_jadwal} th:object="${jadwal}" method="post">
+        <input type="hidden" th:field="*{idJadwal}">
+        <h4>Input Jadwal</h4>
+        <div class="row">
+            <div class="form-group mb-3">
+                <label for="stasiun_asal" class="col-form-label col-form-label-sm">Stasiun Awal</label>
+                <div class="col-12" style="width: 400px">
+                    <input type="text" th:field="*{stasiunAsal}" class="form-control form-control-sm"
+                           id="stasiun_asal" required/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mb-3">
+                <label for="stasiun_tujuan" class="col-form-label col-form-label-sm">Stasiun Tujuan</label>
+                <div class="col-12" style="width: 400px">
+                    <input type="text" th:field="*{stasiunTujuan}" class="form-control form-control-sm"
+                           id="stasiun_tujuan" required/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mb-3">
+                <label for="waktu_berangkat" class="col-form-label col-form-label-sm">Waktu Berangkat</label>
+                <div class="col-12" style="width: 400px">
+                    <input type="datetime-local" th:field="*{waktuBerangkat}" class="form-control form-control-sm"
+                           id="waktu_berangkat" required/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mb-3">
+                <label for="waktu_tiba" class="col-form-label col-form-label-sm">Waktu Tiba</label>
+                <div class="col-12" style="width: 400px">
+                    <input type="datetime-local" th:field="*{waktuTiba}" class="form-control form-control-sm"
+                           id="waktu_tiba" required/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mb-3">
+                <label for="id_kereta" class="col-form-label col-form-label-sm">Kereta</label>
+                <div class="col-12" style="width: 200px">
+                    <input type="number" th:field="*{idKereta}" class="form-control form-control-sm"
+                           id="id_kereta" required/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding:13px">
+            <button style="width:150px" type="submit" class="btn btn-primary btn-sm">Edit Jadwal</button>
+        </div>
+    </form>
+
+</div>
+
+<footer th:replace="fragments :: footer"/>
+
+</body>
+</html>

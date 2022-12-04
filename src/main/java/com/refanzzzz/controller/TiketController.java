@@ -22,7 +22,7 @@ public class TiketController {
 
     @GetMapping("/pesan_tiket")
     public String pesanTiket(Model model) {
-        String sql = "SELECT A.id_tiket, A.no_kursi, A.stok, A.harga, B.stasiun_asal, B.stasiun_tujuan, B.waktu_berangkat, B.waktu_tiba, C.nama_kereta, C.kelas FROM tiket A " +
+        String sql = "SELECT A.id_tiket, A.stok, A.harga, B.stasiun_asal, B.stasiun_tujuan, B.waktu_berangkat, B.waktu_tiba, C.nama_kereta, C.kelas FROM tiket A " +
                 "INNER JOIN jadwal B ON A.id_jadwal = B.id_jadwal INNER JOIN kereta C ON B.id_kereta = C.id_kereta";
 
         List<Tiket> tiket = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Tiket.class));
@@ -96,13 +96,19 @@ public class TiketController {
     @PostMapping("/payment")
     public String bayar(Pembayaran pembayaran) {
         String sql = "INSERT INTO pembayaran (jenis_pembayaran, total_biaya, id_pemesan) VALUES (?, ?, ?)";
-        String sql1 = "SELECT A.jumlah_beli, B.harga FROM pemesan A INNER JOIN tiket B ON A.id_tiket = B.id_tiket WHERE id_pemesan = ?";
+        String sql1 = "SELECT A.jumlah_beli, B.id_tiket, B.harga, B.stok FROM pemesan A INNER JOIN tiket B ON A.id_tiket = B.id_tiket WHERE id_pemesan = ?";
+        String sql2 = "UPDATE tiket SET stok = ? WHERE id_tiket = ? ";
 
         Pemesan pemesan = jdbcTemplate.queryForObject(sql1, BeanPropertyRowMapper.newInstance(Pemesan.class), pembayaran.getIdPemesan());
+
+        int stokSekarang = pemesan.getStok() - pemesan.getJumlahBeli();
+
+        System.out.print(stokSekarang);
 
         int ttl = pemesan.getHarga() * pemesan.getJumlahBeli();
 
         jdbcTemplate.update(sql, pembayaran.getJenisPembayaran(), ttl, pembayaran.getIdPemesan());
+        jdbcTemplate.update(sql2, stokSekarang, pemesan.getIdTiket());
 
         return "redirect:/payment_success";
     }

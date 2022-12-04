@@ -46,7 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/pesan_tiket", "/about", "/order_form/{id_tiket}", "/payment_form", "/payment_success").authenticated()
+			.antMatchers("/pesan_tiket", "/about", "/order_form/{id_tiket}", "/payment_form",
+					"/payment_success", "/daftar_jadwal", "/tambah_jadwal",
+					"/proses_tambah_jadwal", "/edit_jadwal/{id_jadwal}",
+					"/proses_edit_jadwal", "/proses_hapus_jadwal/{id_jadwal}", "/pulihkan_jadwal").authenticated()
 			.anyRequest().permitAll()
 			.and()
 			.formLogin()

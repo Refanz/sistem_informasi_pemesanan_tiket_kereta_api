@@ -28,6 +28,10 @@
                         Tiket</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" th:classappend="${jadwalActive == 'true' ? 'active' : ''}"
+                       href="/daftar_jadwal">Daftar Jadwal</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" th:classappend="${aboutActive == 'true' ? 'active' : ''}"
                        href="/about">About</a>
                 </li>

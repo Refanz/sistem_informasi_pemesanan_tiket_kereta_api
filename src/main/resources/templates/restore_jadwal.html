@@ -1,45 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: header"/>
+
 <body>
 
 <nav th:insert="fragments :: navbar"/>
 
 <div class="container mt-3">
 
-    <h3 class="text-center mb-5">Daftar Jadwal Keberangkatan Kereta Api</h3>
-
+    <h3 class="text-center mb-3">Daftar Jadwal</h3>
+    <div class="row text-center justify-content-center">
+        <div class="col-5 mb-2">
+            <a th:href="@{/tambah_jadwal}" class="btn btn-primary">Tambah</a>
+            <a th:href="@{/pulihkan_jadwal}" class="btn btn-success">Restore</a>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="table-responsive col-10 mb-3">
             <table id="table1" class="table table-sm" style="width:100%">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nama Kereta</th>
                     <th scope="col">Staisun Asal</th>
                     <th scope="col">Stasiun Tujuan</th>
                     <th scope="col">Waktu Berangkat</th>
                     <th scope="col">Waktu Tiba</th>
-                    <th scope="col">Stok</th>
-                    <th scope="col">Kelas</th>
-                    <th scope="col">Harga</th>
                     <th scope="col">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="tiket, count : ${tiket}">
+                <tr th:each="jadwal, count : ${jadwal}">
                     <th scope="row" th:text="${count.index + 1}"></th>
-                    <td th:text="${tiket.namaKereta}"></td>
-                    <td th:text="${tiket.stasiunAsal}"></td>
-                    <td th:text="${tiket.stasiunTujuan}"></td>
-                    <td th:text="${tiket.waktuBerangkat}"></td>
-                    <td th:text="${tiket.waktuTiba}"></td>
-                    <td th:text="${tiket.stok}"></td>
-                    <td th:text="${tiket.kelas}"></td>
-                    <td th:text="${tiket.harga}"></td>
+                    <td th:text="${jadwal.stasiunAsal}"></td>
+                    <td th:text="${jadwal.stasiunTujuan}"></td>
+                    <td th:text="${jadwal.waktuBerangkat}"></td>
+                    <td th:text="${jadwal.waktuTiba}"></td>
                     <td>
-                        <a class="btn btn-primary" th:classappend="${tiket.stok == 0 ? 'disabled' : ''}"
-                           th:href="@{/order_form/{id_tiket}(id_tiket=${tiket.idTiket})}">Pesan</a>
+                        <a class="btn btn-primary" th:href="@{/edit_jadwal/{id_jadwal}(id_jadwal = ${jadwal.idJadwal})}">Edit</a>
+                        <a class="btn btn-danger" th:href="@{/proses_hapus_jadwal/{id_jadwal}(id_jadwal = ${jadwal.idJadwal})}">Hapus</a>
                     </td>
                 </tr>
                 </tbody>
@@ -55,5 +53,6 @@
        $('#table1').DataTable();
     });
 </script>
+
 </body>
 </html>
