@@ -42,13 +42,13 @@ public class JadwalController {
 
     @PostMapping("/proses_tambah_jadwal")
     public String prosesTambahJadwal(Jadwal jadwal) {
-        String sql = "INSERT INTO jadwal (stasiun_asal, stasiun_tujuan, waktu_berangkat, waktu_tiba, id_kereta) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO jadwal (stasiun_asal, stasiun_tujuan, waktu_berangkat, waktu_tiba, id_kereta, is_delete) VALUES (?, ?, ?, ?, ?, ?)";
 
         String waktuBerangkat = jadwal.getWaktuBerangkat().replace("T",":");
 
         String waktuTiba = jadwal.getWaktuTiba().replace("T", ":");
 
-        jdbcTemplate.update(sql, jadwal.getStasiunAsal(), jadwal.getStasiunTujuan(), waktuBerangkat, waktuTiba, jadwal.getIdKereta());
+        jdbcTemplate.update(sql, jadwal.getStasiunAsal(), jadwal.getStasiunTujuan(), waktuBerangkat, waktuTiba, jadwal.getIdKereta(), "false");
 
         return "redirect:/daftar_jadwal";
     }
@@ -85,12 +85,33 @@ public class JadwalController {
     }
 
     @GetMapping("/pulihkan_jadwal")
-    public String prosesPulihkanJadwal() {
-        String sql = "UPDATE jadwal SET is_delete = ?";
+    public String formPemulihan(Model model) {
+        String sql = "SELECT * FROM jadwal WHERE is_delete = ? ";
 
-        jdbcTemplate.update(sql, "false");
+        List<Jadwal> jadwal = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Jadwal.class), "true");
+
+        model.addAttribute("jadwal", jadwal);
+        model.addAttribute("jadwalActive", "true");
+
+        return "restore_jadwal";
+    }
+
+    @GetMapping("/pulihkan_jadwal/recover/{id_jadwal}")
+    public String pulihkanJadwal(@PathVariable("id_jadwal") int id_jadwal) {
+        String sql = "UPDATE jadwal SET is_delete = ? WHERE id_jadwal = ?";
+
+        jdbcTemplate.update(sql, "false", id_jadwal);
 
         return "redirect:/daftar_jadwal";
+    }
+
+    @GetMapping("/pulihkan_jadwal/delete/{id_jadwal}")
+    public String hapusJadwalPermanen(@PathVariable("id_jadwal") int id_jadwal) {
+        String sql = "DELETE FROM jadwal WHERE id_jadwal = ?";
+
+        jdbcTemplate.update(sql, id_jadwal);
+
+        return "redirect:/pulihkan_jadwal";
     }
 
 

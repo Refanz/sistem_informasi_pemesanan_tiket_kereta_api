@@ -8,13 +8,7 @@
 
 <div class="container mt-3">
 
-    <h3 class="text-center mb-3">Daftar Jadwal</h3>
-    <div class="row text-center justify-content-center">
-        <div class="col-5 mb-2">
-            <a th:href="@{/tambah_jadwal}" class="btn btn-primary">Tambah</a>
-            <a th:href="@{/pulihkan_jadwal}" class="btn btn-success">Restore</a>
-        </div>
-    </div>
+    <h3 class="text-center mb-3">Daftar Jadwal Pemulihan</h3>
     <div class="row justify-content-center">
         <div class="table-responsive col-10 mb-3">
             <table id="table1" class="table table-sm" style="width:100%">
@@ -36,8 +30,8 @@
                     <td th:text="${jadwal.waktuBerangkat}"></td>
                     <td th:text="${jadwal.waktuTiba}"></td>
                     <td>
-                        <a class="btn btn-primary" th:href="@{/edit_jadwal/{id_jadwal}(id_jadwal = ${jadwal.idJadwal})}">Edit</a>
-                        <a class="btn btn-danger" th:href="@{/proses_hapus_jadwal/{id_jadwal}(id_jadwal = ${jadwal.idJadwal})}">Hapus</a>
+                        <a class="btn btn-success" th:href="@{/pulihkan_jadwal/recover/{id_jadwal}(id_jadwal = ${jadwal.idJadwal})}">Pulihkan</a>
+                        <a class="btn btn-danger" th:href="@{/pulihkan_jadwal/delete/{id_jadwal}(id_jadwal = ${jadwal.idJadwal})}">Hapus</a>
                     </td>
                 </tr>
                 </tbody>

@@ -36,7 +36,7 @@ public class UserController {
 		String sql = "INSERT INTO users (username, password, name) VALUES(?, ?, ?)";
 		jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getName());
 		
-		return "register_success";
+		return "login_form";
 	}
 	
 	@GetMapping("/users")
