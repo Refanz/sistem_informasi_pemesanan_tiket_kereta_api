@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header"/>
+<body>
+
+<nav th:insert="fragments :: navbar"/>
+
+<div class="container mt-3 text-center">
+    <h4>Your payment has been successful, <br>click the button below to return to the schedule list page</h4>
+    <h5><a th:href="@{/pesan_tiket}">Click here to the schedule list page</a></h5>
+</div>
+
+
+<footer th:replace="fragments :: footer"/>
+</body>
+</html>

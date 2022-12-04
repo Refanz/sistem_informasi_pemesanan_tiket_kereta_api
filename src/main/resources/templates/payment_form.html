@@ -7,6 +7,80 @@
 
 <nav th:insert="fragments :: navbar"/>
 
+<div class="container mt-3 d-flex" style="width:100%">
+    <div class="row me-5">
+        <div class="card">
+            <div class="card-body mb-0">
+                <h5 class="card-title" th:text="${'Tiket Kereta Api ' + pemesan.namaKereta}"></h5>
+                <p class="card-text" th:text="${pemesan.kelas}"></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-primary"
+                    th:text="${'Waktu Berangkat : ' + pemesan.waktuBerangkat}"></li>
+                <li class="list-group-item text-primary" th:text="${'Waktu Tiba : ' + pemesan.waktuTiba}"></li>
+                <li class="list-group-item" th:text="${'Stasiun Asal : ' + pemesan.stasiunAsal}"></li>
+                <li class="list-group-item" th:text="${'Stasiun Tujuan : ' + pemesan.stasiunTujuan}"></li>
+            </ul>
+            <div class="card-body">
+                <h6 class="card-text" th:text="${'Harga : ' + pemesan.harga}"></h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-inline">
+        <h4>Data Pemesan</h4>
+        <div class="row">
+            <div class="form-group mb-3">
+                <label for="nama_pemesan" class="col-form-label col-form-label-sm">Nama Pemesan</label>
+                <div class="col-12" style="width: 400px">
+                    <input type="text" th:field="*{pemesan.namaPemesan}" class="form-control form-control-sm"
+                           id="nama_pemesan" disabled/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mb-3">
+                <label for="jumlah_beli" class="col-form-label col-form-label-sm">Jumlah Beli</label>
+                <div class="col-12" style="width: 100px">
+                    <input type="number" th:field="*{pemesan.jumlahBeli}" class="form-control form-control-sm"
+                           id="jumlah_beli" disabled/>
+                </div>
+            </div>
+        </div>
+
+        <form th:action=@{/payment} th:object="${pembayaran}" method="post">
+            <input type="hidden" th:field="${pembayaran.idPemesan}">
+            <h4>Data Pembayaran</h4>
+            <div class="row">
+                <div class="form-group mb-3">
+                    <label for="total_biaya" class="col-form-label col-form-label-sm">Total Biaya</label>
+                    <div class="col-12" style="width: 400px">
+                        <input type="number" th:field="${pembayaran.totalBiaya}" class="form-control form-control-sm"
+                               id="total_biaya" disabled/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group mb-3">
+                    <label for="jenis_bayar" class="col-form-label col-form-label-sm">Jenis Pembayaran</label>
+                    <div class="col-12" style="width: 400px">
+                        <select th:field="${pembayaran.jenisPembayaran}" class="form-control form-control-sm"
+                                id="jenis_bayar">
+                            <option th:value="OVO">OVO</option>
+                            <option th:value="DANA">DANA</option>
+                            <option th:value="KREDIVO">KREDIVO</option>
+                            <option th:value="SHOPEEPAY">SHOPEEPAY</option>
+                            <option th:value="GOPAY">GOPAY</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding:13px">
+                <button style="width:100px" type="submit" class="btn btn-primary btn-sm">Pesan</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <footer th:replace="fragments :: footer"/>
 
